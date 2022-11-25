@@ -14,23 +14,28 @@
 </div>
 
 <div class="games">
-  <div class="game">
-    <div class="game-thumb-container">
-      <img
-        src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/73b49398-555e-4714-8529-1e26c6571674/d2yhbzt-b67491b4-863d-4d0e-b726-e62c4f3d156d.jpg/v1/fill/w_900,h_631,q_75,strp/ichigo___come_on__aizen_by_diabolumberto_d2yhbzt-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzczYjQ5Mzk4LTU1NWUtNDcxNC04NTI5LTFlMjZjNjU3MTY3NFwvZDJ5aGJ6dC1iNjc0OTFiNC04NjNkLTRkMGUtYjcyNi1lNjJjNGYzZDE1NmQuanBnIiwiaGVpZ2h0IjoiPD02MzEiLCJ3aWR0aCI6Ijw9OTAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLndhdGVybWFyayJdLCJ3bWsiOnsicGF0aCI6Ilwvd21cLzczYjQ5Mzk4LTU1NWUtNDcxNC04NTI5LTFlMjZjNjU3MTY3NFwvZGlhYm9sdW1iZXJ0by00LnBuZyIsIm9wYWNpdHkiOjk1LCJwcm9wb3J0aW9ucyI6MC40NSwiZ3Jhdml0eSI6ImNlbnRlciJ9fQ.5HC72TdSGSK-t3ShbhS1Pr2hn7rnkW5JipJOdb6wiNA"
-        alt="thumbnail"
-        class="game-thumbnail"
-      />
-    </div>
-    <div class="game-description">
-      <p class="game-name">Name</p>
-      <div class="game-platforms">
+  <ng-container *ngFor="let game of games">
+    <div class="game">
+      <div class="game-thumb-container">
         <img
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg"
-          alt="slug"
-          class="game-platform"
+          *ngIf="game.background_image"
+          src="{{ game.background_image }}"
+          alt="thumbnail"
+          class="game-thumbnail"
         />
+        <p *ngIf="!game.background_image">No image</p>
+      </div>
+      <div class="game-description">
+        <p class="game-name">{{ game.name }}</p>
+        <div class="game-platforms">
+          <img
+            *ngFor="let gamePlatform of game.parent_platforms"
+            class="game-platform"
+            src="assets/images/platforms/{{ gamePlatform.platform.slug }}.svg"
+            alt="{{ gamePlatform.platform.slug }}"
+          />
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>
