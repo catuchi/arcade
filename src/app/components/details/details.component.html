@@ -1,18 +1,20 @@
-<div class="details">
+<div class="details" *ngIf="game">
   <div class="game-banner">
     <img
       class="game-banner-img"
-      src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f9bfc70d-36ee-4f57-ab63-52963f24c1a5/dep6jyk-7e5a5845-6cab-4923-80a7-0adbff533812.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Y5YmZjNzBkLTM2ZWUtNGY1Ny1hYjYzLTUyOTYzZjI0YzFhNVwvZGVwNmp5ay03ZTVhNTg0NS02Y2FiLTQ5MjMtODBhNy0wYWRiZmY1MzM4MTIuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.s-y9NQ7ZArz8C11Q5DklhMi-9u_wueg8U65Bno6wrYg"
+      src="{{ game.background_image }}"
       alt="background image"
     />
   </div>
   <div class="game-content">
     <div class="details-wrapper">
       <div class="game-header">
-        <h1 class="game-header-title">Game Name</h1>
-        <h2 class="game-header-release-date">Release: 1.2.2002</h2>
+        <h1 class="game-header-title">{{ game.name }}</h1>
+        <h2 class="game-header-release-date">{{ game.released | date }}</h2>
         <p class="game-header-genres">
-          <span>RPG</span>
+          <span *ngFor="let genre of game.genres; let last = last"
+            >{{ genre.name }}<span *ngIf="!last">, </span></span
+          >
         </p>
         <div class="game-gauge">
           <mwl-gauge
@@ -26,7 +28,12 @@
             [animationDuration]="2"
           >
           </mwl-gauge>
-          <a href="" target="_blank" class="game-gauge-label">Metacritic</a>
+          <a
+            href="{{ game.metacritic_url }}"
+            target="_blank"
+            class="game-gauge-label"
+            >Metacritic</a
+          >
         </div>
       </div>
     </div>
